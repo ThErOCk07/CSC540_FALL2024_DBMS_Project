@@ -3,12 +3,18 @@ import java.sql.*;
 import java.util.Scanner;
 
 public class App {
+
+    static Scanner cin = new Scanner(System.in);
+
     public static void main(String[] args) {
+        getConnection();
+        displayHomePage();
+    }
 
-
-        String DB_URL = "jdbc:mysql://127.0.0.1:3306/DBMSProject";
-        String DB_USER = "root";
-        String DB_PASSWORD = "Whiterose@59";
+    public static void getConnection(){
+        final String DB_URL = "jdbc:mysql://127.0.0.1:3306/DBMSProject";
+        final String DB_USER = "root";
+        final String DB_PASSWORD = "Whiterose@59";
 
         try {
             // Establish a connection
@@ -17,37 +23,30 @@ public class App {
         } catch (SQLException e) {
             System.out.println("Connection failed: " + e.getMessage());
         }
-
-        addStudent();
     }
 
-    public static void addStudent() {
-        String DB_URL = "jdbc:mysql://127.0.0.1:3306/DBMSProject";
-        String DB_USER = "root";
-        String DB_PASSWORD = "Whiterose@59";
+    public static void displayHomePage(){
+        System.out.println("!!!WELCOME!!!");
+        System.out.println("\n1.Admin Login\n2.Faculty Login\n3.TA Login\n4.Student Login\n5.EXIT");
+        int c = cin.nextInt();
 
-        int student_id = 2;
-        String name = "Vaibhavi Sangawar";
-        String username = "vaibzz";
-        String password = "vaibhavi@12345";
-        String email = "vaibhavi@gmail.com";
-
-        String sql = "INSERT INTO students (student_id, full_name, username, password, email) VALUES (?, ?, ?, ?, ?)";
-
-        try (Connection conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
-
-            pstmt.setInt(1, student_id); // Set username
-            pstmt.setString(2, name);
-            pstmt.setString(3, username);
-            pstmt.setString(4, password);
-            pstmt.setString(5, email);// Set password
-            pstmt.executeUpdate(); // Execute the insert statement
-
-            System.out.println("Student added successfully!");
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        switch (c) {
+            case 1:
+                AdminLogin.displayAdminLoginPage();
+                break;
+            case 2:
+                FacultyLogin.displayFacultyLoginPage();
+                break;
+            case 3:
+                TALogin.displayTALoginPage();
+                break;
+            case 4:
+                StudentLogin.displayStudentLoginPage();
+                break;
+            default:
+                System.out.println("Invalid choice. Please try again.");
+                break;
         }
     }
+
 }

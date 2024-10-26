@@ -24,3 +24,4 @@ VALUES
 
 SELECT * FROM Activity;
     
+SHOW TABLES;

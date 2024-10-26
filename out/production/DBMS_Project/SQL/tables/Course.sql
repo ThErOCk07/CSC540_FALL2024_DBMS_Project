@@ -26,3 +26,9 @@ VALUES
 	('NCSUSaraCSC326F25', 'CSC326 Software Engineering', 102, 'Evaluation', 'SaMi1024', 'JeGi0924', '2025-08-27', '2025-12-19', NULL, NULL);
 
 -- SELECT * FROM Courses;
+
+ALTER TABLE Courses
+ADD CONSTRAINT
+FOREIGN KEY (faculty_id) REFERENCES Faculty(faculty_id);
+
+
